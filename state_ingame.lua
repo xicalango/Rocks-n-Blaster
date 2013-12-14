@@ -18,11 +18,22 @@ end
 function InGameState:_loadMap(map)
 	self.map = ATL.Loader.load(map)
 
+	gameManager = GameManager:new(self.map)
 
 	self.objectsLayer = self.map("Objects")
 
+
 	local function convertObjects(objectDef)
-		return Player:new(self.map, objectDef.x + 8, objectDef.y + 8, objectDef.properties.number)
+
+		if objectDef.type == "PlayerStartingPosition" then
+
+			return Player:new(objectDef.x + 8, objectDef.y + 8, objectDef.properties.number)
+
+		elseif objectDef.type == "Rock" then
+
+			return Rock:new(objectDef.x + 8, objectDef.y + 8)
+
+		end
 	end
 
 	self.objectsLayer:toCustomLayer(convertObjects)
@@ -36,18 +47,24 @@ function InGameState:_loadMap(map)
 	function self.objectsLayer:update(dt)
 		for k,obj in pairs(self.objects) do
 			obj:update(dt)
+
+			if obj.remove then
+				self.objects[k] = nil
+			end
+
 		end
+
 	end
 
 	function self.objectsLayer:keypressed(key)
 		for k,obj in pairs(self.objects) do
-			obj:keypressed(key)
+			if obj:keypressed(key) then break end
 		end
 	end		
 
 	function self.objectsLayer:keyreleased(key)
 		for k,obj in pairs(self.objects) do
-			obj:keyreleased(key)
+			if obj:keyreleased(key) then break end
 		end
 	end
 
