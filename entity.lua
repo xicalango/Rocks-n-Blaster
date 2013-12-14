@@ -101,9 +101,9 @@ function Entity:draw()
 		self.graphics:draw(self.x, self.y)
 	end
 
-	utils.withColor({255,0,0,255}, function()
-		love.graphics.rectangle( "line", self.x - self.hitbox.left, self.y - self.hitbox.top, self.hitbox.left + self.hitbox.right, self.hitbox.top + self.hitbox.bottom )
-		end)
+	--utils.withColor({255,0,0,255}, function()
+	--	love.graphics.rectangle( "line", self.x - self.hitbox.left, self.y - self.hitbox.top, self.hitbox.left + self.hitbox.right, self.hitbox.top + self.hitbox.bottom )
+	--	end)
 end
 
 function Entity:stop()
@@ -137,6 +137,10 @@ function Entity:update(dt)
 	if self.gravityAffected then
 		if not gameManager:isObstacleInDir(self, 0, 1) then
 			self.vy = self.vy + gameManager:getGravity()
+		elseif self.dX == 0 and not gameManager:isObstacleInDir(self, 1, 1) and not gameManager:isObstacleInDir(self, 1, 0) then
+			self.dX = 16
+		elseif self.dX == 0 and not gameManager:isObstacleInDir(self, -1, 1) and not gameManager:isObstacleInDir(self, -1, 0) then
+			self.dX = -16
 		end
 	end
 
@@ -150,44 +154,52 @@ function Entity:update(dt)
 		end
 	end
 
-	local oldX = self.x
-	local oldY = self.y
-
-	local newX = self.x + (self.vx * self.speedX * dt)
-	local newY = self.y + (self.vy * self.speedY * dt)
-
-	self.x = newX
-	self.y = newY
-
-	local isObstacle, e = gameManager:isObstacleForEntity(self)
 
 
-	if isObstacle then
-		self.x = oldX
-		self:onCollide(e)
-		
-		if gameManager:isObstacleForEntity(self) then
-			self.x = newX
-			self.y = oldY
+	if (self.vx ~= 0 or self.vy ~= 0) then
 
+		local oldX = self.x
+		local oldY = self.y
+
+
+		local newX = self.x + (self.vx * self.speedX * dt)
+		local newY = self.y + (self.vy * self.speedY * dt)
+
+		self.x = newX
+		self.y = newY
+
+		local isObstacle, e = gameManager:isObstacleForEntity(self)
+
+		if isObstacle then
+			self.x = oldX
+			self:onCollide(e)
+			
 			if gameManager:isObstacleForEntity(self) then
-				self.x = oldX
-				self:stop()
+				self.x = newX
+				self.y = oldY
+
+				if gameManager:isObstacleForEntity(self) then
+					self.x = oldX
+					self:stop()
+				end
+
 			end
+			
+
 
 		end
-		
 
+
+		if self.pushable then
+			self.dX = self.dX - (self.x - oldX)
+
+			if self.dX <= 0.001 then
+				self.dX = 0
+			end
+		end
 
 	end
 
-	if self.pushable then
-		self.dX = self.dX - (self.x - oldX)
-
-		if self.dX <= 0.001 then
-			self.dX = 0
-		end
-	end
 
 
 end

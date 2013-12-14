@@ -8,10 +8,10 @@ function Bomb:initialize(x, y, player)
 	self.graphics = Graphics:new("assets/bomb.png")
 	self.graphics.offset = {8, 8}
 
-	self.hitbox.left = 6
-	self.hitbox.top = 6
-	self.hitbox.bottom = 6
-	self.hitbox.right = 6
+	self.hitbox.left = 7
+	self.hitbox.top = 7
+	self.hitbox.bottom = 7
+	self.hitbox.right = 7
 
 	self.byPlayer = player
 
@@ -28,6 +28,8 @@ function Bomb:activate()
 end
 
 function Bomb:explode()
+	if self.remove then return end
+	
 	gameManager:explode(self.x, self.y, 1)
 	self.remove = true
 end

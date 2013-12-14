@@ -18,3 +18,5 @@ player.3.right=kp6
 player.3.down=kp5
 player.3.up=kp8
 player.3.bomb=kp0
+
+reset=r

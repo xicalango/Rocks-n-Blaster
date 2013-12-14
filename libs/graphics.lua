@@ -29,9 +29,17 @@ end
 
 function Graphics:_draw(x, y, ox, oy, r, sx, sy)
 	love.graphics.draw( self.graphics, x, y, r, sx, sy, ox, oy)
-
-	utils.withColor({255, 0, 0, 255}, function()
-		love.graphics.rectangle("fill", x, y, 1, 1)
-	end)
 end
 
+TextGraphics = AbstractGraphics:subclass("TextGraphics")
+
+function TextGraphics:initialize(text)
+	AbstractGraphics.initialize(self)
+	self.text = text
+end
+
+function TextGraphics:_draw(x, y, ox, oy, r, sx, sy)
+	utils.withColor({255,255,255,255}, function()
+		love.graphics.print( self.text, x, y, r, sx, sy, ox, oy ) 
+	end)
+end

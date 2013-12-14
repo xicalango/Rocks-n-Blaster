@@ -3,9 +3,9 @@
 GameManager = class("GameManager")
 
 
-function GameManager:initialize(map, addEntityCallback)
+function GameManager:initialize(map, state)
 	self.map = map
-	self.addEntityCallback = addEntityCallback
+	self.state = state
 
 	self.tiles = {}
 
@@ -61,11 +61,17 @@ function GameManager:getObjectsOnMap(mapX, mapY)
 
 end
 
+function GameManager:isOutOfMap(mapX, mapY)
+	return mapX < 0 or mapY < 0 or mapX >= self.map.width or mapY >= self.map.height
+end
+
 function GameManager:isObstacle(mapX, mapY)
+	if self:isOutOfMap(mapX, mapY) then return true end
 	return self.map("Ground")(mapX,mapY).properties.obstacle == 1 
 end
 
 function GameManager:isBlastable(mapX, mapY)
+	if self:isOutOfMap(mapX, mapY) then return true end
 	return self.map("Ground")(mapX,mapY).properties.blastable == 1 
 end
 
@@ -108,15 +114,27 @@ end
 
 function GameManager:blastTile(mapX, mapY)
 
+	oldX = oldX or mapX
+	oldY = oldY or mapY
+
 	local tile = self.map("Ground")(mapX,mapY)
 
-	if tile.properties.blastable == 0 then
+	if tile.properties.blastable == nil or tile.properties.blastable == 0 then
 		return
 	end
 
 	self.map("Ground"):set(mapX, mapY, self.tiles[tile.properties.blastTo])
 
+	if tile.properties.chainBlast == 1 then
+		self:blastTile(mapX - 1, mapY, mapX, mapY)
+		self:blastTile(mapX + 1, mapY, mapX, mapY)
+		self:blastTile(mapX, mapY + 1, mapX, mapY)
+		self:blastTile(mapX, mapY - 1, mapX, mapY)
+	end
+
+	self.state:addEntity( Explosion:new(self:toEntityXY(mapX, mapY, 8, 8)) )
 	self.map:forceRedraw()
+
 
 end
 
@@ -126,7 +144,7 @@ function GameManager:explode(x, y, size)
 
 	local positions = { {mX, mY} }
 
-	for i = 0, size do
+	for i = 1, size do
 
 		if self:isBlastable( mX + i, mY) or not self:isObstacle( mX + i, mY ) then
 			table.insert(positions, {mX + i , mY})
@@ -146,8 +164,8 @@ function GameManager:explode(x, y, size)
 
 	end
 
-	for _,pos in ipairs(positions) do
 
+	for _,pos in ipairs(positions) do
 		self:blastTile(pos[1], pos[2])
 
 		local entities = self:getObjectsOnMap(pos[1], pos[2])
@@ -158,7 +176,7 @@ function GameManager:explode(x, y, size)
 			end
 		end
 
-		self.addEntityCallback( Explosion:new(self:toEntityXY(pos[1],pos[2], 8, 8)) )
+		self.state:addEntity( Explosion:new(self:toEntityXY(pos[1], pos[2], 8, 8)) )
 
 	end
 
@@ -175,6 +193,31 @@ function GameManager:placeBomb(x, y)
 
 	bomb:activate()
 
-	self.addEntityCallback(bomb)
+	self.state:addEntity(bomb)
 
+end
+
+function GameManager:isEntityOnExit(entity)
+
+	local mX, mY = self:toMapXY(entity.x, entity.y)
+
+	return self.map("Ground")(mX,mY).properties.name == "Door"
+
+end
+
+function GameManager:nextMap()
+
+	local nextMap = self.map.properties.nextMap
+
+	if nextMap == nil or #nextMap == 0 then
+		love.event.push('quit')
+	else
+		gameStateManager:changeState(InGameState, nextMap)
+	end
+
+
+end
+
+function GameManager:resetMap()
+	self.state:resetMap()
 end

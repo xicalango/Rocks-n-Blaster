@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="13" height="8" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="20" height="3" tilewidth="16" tileheight="16">
  <properties>
   <property name="gravity" value="10"/>
-  <property name="nextMap" value="map2.tmx"/>
+  <property name="nextMap" value="tutorial3.tmx"/>
  </properties>
  <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16">
   <image source="../assets/tiles.png" width="32" height="48"/>
@@ -34,39 +34,29 @@
     <property name="obstacle" value="0"/>
    </properties>
   </tile>
-  <tile id="4">
-   <properties>
-    <property name="blastTo" value="Floor"/>
-    <property name="blastable" value="1"/>
-    <property name="chainBlast" value="1"/>
-    <property name="name" value="ChainBlastableWall"/>
-    <property name="obstacle" value="1"/>
-   </properties>
-  </tile>
  </tileset>
- <layer name="Ground" width="13" height="8">
+ <layer name="Ground" width="20" height="3">
   <data encoding="csv">
-1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,2,2,2,2,2,2,2,2,2,2,4,1,
-1,2,1,1,1,1,1,5,1,1,1,1,1,
-1,2,1,1,1,1,1,5,1,1,1,1,1,
-1,2,2,2,2,2,2,2,2,2,2,2,1,
-1,1,1,1,1,1,1,1,1,1,1,2,1,
-1,2,2,2,2,2,2,2,2,2,2,2,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,4,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="Objects" width="13" height="8">
-  <object name="Player" type="PlayerStartingPosition" x="16" y="96" width="16" height="16">
+ <objectgroup name="Objects" width="20" height="3">
+  <object name="Player" type="PlayerStartingPosition" x="16" y="16" width="16" height="16">
    <properties>
     <property name="number" value="0"/>
    </properties>
   </object>
-  <object name="R" type="Rock" x="96" y="64" width="16" height="16">
-   <ellipse/>
+  <object name="Message1" type="Message" x="16" y="0" width="16" height="16">
+   <properties>
+    <property name="message" value="Those walls can be blasted (press TAB)"/>
+   </properties>
   </object>
-  <object name="R" type="Rock" x="80" y="16" width="16" height="16">
-   <ellipse/>
+  <object name="Message2" type="Message" x="16" y="32" width="16" height="16">
+   <properties>
+    <property name="message" value="You Only Get One bomb per level!"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

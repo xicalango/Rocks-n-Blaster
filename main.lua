@@ -14,6 +14,7 @@ require("player")
 require("bomb")
 require("rock")
 require("explosion")
+require("message")
 
 require("state_ingame")
 
@@ -25,7 +26,10 @@ function love.load()
 
 	gameStateManager = GameStateManager:new()
 	gameStateManager:registerState(InGameState)
-	gameStateManager:changeState(InGameState, "map1.tmx")
+	gameStateManager:changeState(InGameState, "tutorial1.tmx")
+
+	mainFont = love.graphics.newFont("assets/Munro.ttf")
+	love.graphics.setFont(mainFont)
 end
 
 

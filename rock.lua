@@ -10,54 +10,15 @@ function Rock:initialize(x, y)
 
 	self.gravityAffected = true
 
-	self.hitbox.left = 6
-	self.hitbox.top = 6
-	self.hitbox.bottom = 6
-	self.hitbox.right = 6
+	self.hitbox.left = 7
+	self.hitbox.top = 7
+	self.hitbox.bottom = 7
+	self.hitbox.right = 7
 
 	self.dX = 0
 
-	self.speedX = 16
+	self.speedX = 15*16
 
 	self.pushable = true
-
-end
-
-function Rock:push(dX)
-
-	local oldX = self.x
-
-	self.x = self.x + dX
-
-	if not gameManager:isObstacleForEntity(self) then
-		self.dX = dX
-	end
-
-	self.x = oldX
-
-
-end
-
-function Rock:update(dt)
-
-	if self.dX < 0 then
-		self.vx = -1
-	elseif self.dX > 0 then
-		self.vx = 1
-	else
-		self.vx = 0
-	end
-
-	local oldX = self.x
-
-	Entity.update(self, dt)
-
-	local dX = self.x - oldX
-
-	self.dX = self.dX - dX
-
-	if self.dX <= 0.001 then
-		self.dX = 0
-	end
 
 end

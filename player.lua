@@ -10,13 +10,15 @@ function Player:initialize(x, y, number)
 
 	self.number = number
 
-	self.hitbox.left = 6
-	self.hitbox.top = 6
-	self.hitbox.bottom = 6
-	self.hitbox.right = 6
+	self.hitbox.left = 4
+	self.hitbox.top = 4
+	self.hitbox.bottom = 4
+	self.hitbox.right = 4
 
 	self.speedX = 15*16
 	self.speedY = 15*16
+
+	self.hasBomb = true
 end
 
 
@@ -38,7 +40,8 @@ function Player:keypressed( key )
 		return true
 	end
 
-	if key == keyconfig.player[self.number].bomb then
+	if key == keyconfig.player[self.number].bomb and self.hasBomb then
+		self.hasBomb = false
 		gameManager:placeBomb(self.x ,self.y)
 	end
 
@@ -71,4 +74,18 @@ function Player:onCollide(e)
 	if e ~= nil and e.pushable then
 		e.dX = self.vx * 16
 	end
+end
+
+function Player:update(dt)
+
+	Entity.update(self,dt)
+
+	if gameManager:isEntityOnExit(self) then
+		gameManager:nextMap()
+	end
+
+end
+
+function Player:onExplode()
+	gameManager:resetMap()
 end

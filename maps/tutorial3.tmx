@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="5" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="gravity" value="10"/>
+  <property name="nextMap" value="map1.tmx"/>
+ </properties>
+ <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16">
+  <image source="../assets/tiles.png" width="32" height="48"/>
+  <tile id="0">
+   <properties>
+    <property name="blastable" value="0"/>
+    <property name="name" value="Wall"/>
+    <property name="obstacle" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blastable" value="0"/>
+    <property name="name" value="Floor"/>
+    <property name="obstacle" value="0"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blastTo" value="Floor"/>
+    <property name="blastable" value="1"/>
+    <property name="name" value="BlastableWall"/>
+    <property name="obstacle" value="1"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="name" value="Door"/>
+    <property name="obstacle" value="0"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Ground" width="20" height="5">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,2,1,
+1,2,1,1,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1,1,
+1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup name="Objects" width="20" height="5">
+  <object name="Player" type="PlayerStartingPosition" x="16" y="48" width="16" height="16">
+   <properties>
+    <property name="number" value="0"/>
+   </properties>
+  </object>
+  <object type="Rock" x="128" y="16" width="16" height="16">
+   <properties>
+    <property name="gravityAffected" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="Message" type="Message" x="144" y="32" width="16" height="16">
+   <properties>
+    <property name="message" value="Rocks fall down according to gravity"/>
+   </properties>
+  </object>
+  <object name="Message2" type="Message" x="128" y="64" width="16" height="16">
+   <properties>
+    <property name="message" value=" ^ Bomb here"/>
+   </properties>
+  </object>
+  <object name="Message3" type="Message" x="144" y="48" width="16" height="16">
+   <properties>
+    <property name="message" value="Press r to reset"/>
+   </properties>
+  </object>
+  <object type="Rock" x="160" y="16" width="16" height="16">
+   <properties>
+    <property name="gravityAffected" value="1"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

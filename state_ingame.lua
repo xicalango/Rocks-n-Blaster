@@ -11,9 +11,11 @@ function InGameState:initialize()
 	self.addEntities = {}
 end
 
-function InGameState:onActivation(map)
+function InGameState:onActivation(mapFile)
 
-	self:_loadMap(map)	
+	self.mapFile = mapFile
+
+	self:_loadMap(mapFile)	
 
 end
 
@@ -24,7 +26,7 @@ end
 function InGameState:_loadMap(map)
 	self.map = ATL.Loader.load(map)
 
-	gameManager = GameManager:new(self.map, function(e) self:addEntity(e) end)
+	gameManager = GameManager:new(self.map, self)
 
 	self.objectsLayer = self.map("Objects")
 
@@ -38,6 +40,10 @@ function InGameState:_loadMap(map)
 		elseif objectDef.type == "Rock" then
 
 			return Rock:new(objectDef.x + 8, objectDef.y + 8)
+
+		elseif objectDef.type == "Message" then
+
+			return Message:new(objectDef.x, objectDef.y, objectDef.properties.message)
 
 		end
 	end
@@ -91,8 +97,17 @@ function InGameState:update(dt)
 	self.addEntities = {}
 end
 
-function InGameState:keypressed(...)
-	self.map:callback("keypressed", ...)
+function InGameState:keypressed(key)
+
+	if key == keyconfig.reset then
+		self:resetMap()
+	end
+
+	if key == "f11" then
+		gameManager:nextMap()
+	end
+
+	self.map:callback("keypressed", key)
 end
 
 function InGameState:keyreleased(key)
@@ -100,3 +115,6 @@ function InGameState:keyreleased(key)
 end
 
 
+function InGameState:resetMap()
+	gameStateManager:changeState(InGameState, self.mapFile)
+end
