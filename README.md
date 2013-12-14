@@ -1,7 +1,9 @@
 Rocks-n-Blaster
 ===============
 
-Rocks-n-Blaster -- my Ludum Dare 28 Contribution
+Rocks-n-Blaster -- my Ludum Dare 28 contribution
+
+Needs LÖVE2D version 0.8.0. (Tested under Windows 7 x64)
 
 
 Licences and stuff
