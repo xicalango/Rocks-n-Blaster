@@ -14,7 +14,8 @@ function Entity:initialize( x, y)
 	self.vx = 0
 	self.vy = 0
 
-	self.speed = 1
+	self.speedX = 16
+	self.speedY = 1
 
 	self.graphics = nil
 
@@ -25,6 +26,29 @@ function Entity:initialize( x, y)
 	self.remove = false
 
 	self.obstacle = true
+	self.blastable = true
+	self.pushable = false
+
+	self.dX = 0
+
+end
+
+function Entity:push(dX)
+
+	if not self.pushable then
+		return
+	end
+
+	local oldX = self.x
+
+	self.x = self.x + dX
+
+	if not gameManager:isObstacleForEntity(self) then
+		self.dX = dX
+	end
+
+	self.x = oldX
+
 
 end
 
@@ -116,18 +140,31 @@ function Entity:update(dt)
 		end
 	end
 
+	if self.pushable  then
+		if self.dX < 0 then
+			self.vx = -1
+		elseif self.dX > 0 then
+			self.vx = 1
+		else
+			self.vx = 0
+		end
+	end
+
 	local oldX = self.x
 	local oldY = self.y
 
-	local newX = self.x + (self.vx * self.speed * dt)
-	local newY = self.y + (self.vy * self.speed * dt)
+	local newX = self.x + (self.vx * self.speedX * dt)
+	local newY = self.y + (self.vy * self.speedY * dt)
 
 	self.x = newX
 	self.y = newY
 
+	local isObstacle, e = gameManager:isObstacleForEntity(self)
 
-	if gameManager:isObstacleForEntity(self) then
+
+	if isObstacle then
 		self.x = oldX
+		self:onCollide(e)
 		
 		if gameManager:isObstacleForEntity(self) then
 			self.x = newX
@@ -144,5 +181,21 @@ function Entity:update(dt)
 
 	end
 
+	if self.pushable then
+		self.dX = self.dX - (self.x - oldX)
 
+		if self.dX <= 0.001 then
+			self.dX = 0
+		end
+	end
+
+
+end
+
+function Entity:onCollide(e)
+
+end
+
+function Entity:onExplode()
+	self.remove = true
 end

@@ -8,14 +8,15 @@ function Bomb:initialize(x, y, player)
 	self.graphics = Graphics:new("assets/bomb.png")
 	self.graphics.offset = {8, 8}
 
-	self.hitbox.left = 7
-	self.hitbox.top = 7
-	self.hitbox.bottom = 7
-	self.hitbox.right = 7
+	self.hitbox.left = 6
+	self.hitbox.top = 6
+	self.hitbox.bottom = 6
+	self.hitbox.right = 6
 
 	self.byPlayer = player
 
 	self.obstacle = false
+
 end
 
 function Bomb:activate()
@@ -32,4 +33,7 @@ function Bomb:explode()
 end
 
 
-
+function Bomb:onExplode()
+	self.remove = true
+	self:explode()
+end

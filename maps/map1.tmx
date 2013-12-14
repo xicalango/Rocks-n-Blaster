@@ -27,11 +27,17 @@
     <property name="obstacle" value="1"/>
    </properties>
   </tile>
+  <tile id="3">
+   <properties>
+    <property name="name" value="Door"/>
+    <property name="obstacle" value="0"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Ground" width="20" height="15">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
+1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,

@@ -13,6 +13,7 @@ require("entity")
 require("player")
 require("bomb")
 require("rock")
+require("explosion")
 
 require("state_ingame")
 

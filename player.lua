@@ -10,12 +10,13 @@ function Player:initialize(x, y, number)
 
 	self.number = number
 
-	self.hitbox.left = 7
-	self.hitbox.top = 7
-	self.hitbox.bottom = 7
-	self.hitbox.right = 7
+	self.hitbox.left = 6
+	self.hitbox.top = 6
+	self.hitbox.bottom = 6
+	self.hitbox.right = 6
 
-	self.speed = 15*16
+	self.speedX = 15*16
+	self.speedY = 15*16
 end
 
 
@@ -64,4 +65,10 @@ function Player:keyreleased( key )
 
 
 	return false
+end
+
+function Player:onCollide(e)
+	if e ~= nil and e.pushable then
+		e.dX = self.vx * 16
+	end
 end

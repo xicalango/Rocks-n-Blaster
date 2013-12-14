@@ -24,7 +24,7 @@ function GameManager:isObstacleForEntity(entity)
 		or gameManager:isObstacle( gameManager:toMapXY(r1x, r2y) )
 		or gameManager:isObstacle( gameManager:toMapXY(r2x, r2y) )
 		or gameManager:isObstacle( gameManager:toMapXY(r2x, r1y) ) then
-		return true
+		return true, nil
 	end
 
 	for k, e2 in pairs(self.map("Objects").objects) do
@@ -32,14 +32,14 @@ function GameManager:isObstacleForEntity(entity)
 		if not entity.remove and entity ~= e2 and e2.obstacle then
 
 			if entity:collidesWith(e2) then
-				return true
+				return true, e2
 			end
 
 		end
 
 	end
 
-	return false
+	return false, nil
 
 end
 
@@ -87,7 +87,19 @@ function GameManager:isObstacleInDir(entity, dx, dy)
 
 	local mapX, mapY = self:toMapXY(entity.x, entity.y)
 
-	return self:isObstacle(mapX + dx, mapY + dy)
+	if self:isObstacle(mapX + dx, mapY + dy) then
+		return true
+	end
+
+	for k, e2 in pairs(self:getObjectsOnMap(mapX + dx, mapY + dy)) do
+
+		if not entity.remove and entity ~= e2 and e2.obstacle then
+			return true
+		end
+
+	end
+
+	return false
 end
 
 function GameManager:getGravity()
@@ -104,7 +116,7 @@ function GameManager:blastTile(mapX, mapY)
 
 	self.map("Ground"):set(mapX, mapY, self.tiles[tile.properties.blastTo])
 
-	print(self.map("Ground")(mapX, mapY).properties.name)
+	self.map:forceRedraw()
 
 end
 
@@ -141,8 +153,12 @@ function GameManager:explode(x, y, size)
 		local entities = self:getObjectsOnMap(pos[1], pos[2])
 
 		for _,e in ipairs(entities) do
-			e.remove = true
+			if not e.remove and e.blastable then
+				e:onExplode()
+			end
 		end
+
+		self.addEntityCallback( Explosion:new(self:toEntityXY(pos[1],pos[2], 8, 8)) )
 
 	end
 
