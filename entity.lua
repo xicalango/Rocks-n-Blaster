@@ -111,6 +111,11 @@ function Entity:stop()
 	self.vx = 0
 end
 
+function Entity:rasterize()
+	local mX, mY = gameManager:toMapXY(self.x, self.y)
+	self.x, self.y = gameManager:toEntityXY(mX, mY, self.graphics.offset[1], self.graphics.offset[2])
+end
+
 function Entity:getHitRectangle()
 	return 
 		self.x - self.hitbox.left, 
@@ -135,13 +140,21 @@ function Entity:update(dt)
 	end
 
 	if self.gravityAffected then
+
+		--print(self.vy, self.vx)
+
 		if not gameManager:isObstacleInDir(self, 0, 1) then
 			self.vy = self.vy + gameManager:getGravity()
-		elseif self.dX == 0 and not gameManager:isObstacleInDir(self, 1, 1) and not gameManager:isObstacleInDir(self, 1, 0) then
-			self.dX = 16
-		elseif self.dX == 0 and not gameManager:isObstacleInDir(self, -1, 1) and not gameManager:isObstacleInDir(self, -1, 0) then
-			self.dX = -16
+
+			if self.dX == 0 and not gameManager:isObstacleInDir(self, 1, 1) and not gameManager:isObstacleInDir(self, 1, 0) then
+				self.dX = 16
+			elseif self.dX == 0 and not gameManager:isObstacleInDir(self, -1, 1) and not gameManager:isObstacleInDir(self, -1, 0) then
+				self.dX = -16
+			end
 		end
+
+		--print(self.vy, self.vx)
+
 	end
 
 	if self.pushable  then
@@ -156,7 +169,7 @@ function Entity:update(dt)
 
 
 
-	if (self.vx ~= 0 or self.vy ~= 0) then
+	if self.vx ~= 0 or self.vy ~= 0 then
 
 		local oldX = self.x
 		local oldY = self.y
@@ -172,23 +185,21 @@ function Entity:update(dt)
 
 		if isObstacle then
 			self.x = oldX
+
 			self:onCollide(e)
-			
+
 			if gameManager:isObstacleForEntity(self) then
 				self.x = newX
 				self.y = oldY
 
 				if gameManager:isObstacleForEntity(self) then
 					self.x = oldX
-					self:stop()
 				end
 
 			end
-			
 
 
 		end
-
 
 		if self.pushable then
 			self.dX = self.dX - (self.x - oldX)
@@ -210,4 +221,7 @@ end
 
 function Entity:onExplode()
 	self.remove = true
+end
+
+function Entity:onMobCollide(mod)
 end

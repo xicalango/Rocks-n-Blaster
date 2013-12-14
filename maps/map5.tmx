@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="5" height="15" tilewidth="16" tileheight="16">
  <properties>
   <property name="gravity" value="10"/>
-  <property name="nextMap" value="map5.tmx"/>
  </properties>
  <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16">
   <image source="../assets/tiles.png" width="32" height="48"/>
@@ -53,29 +52,34 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Ground" width="20" height="15">
+ <layer name="Ground" width="5" height="15">
   <data encoding="csv">
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,3,2,4,1,
-1,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,5,1,
-1,5,1,5,5,5,1,5,5,5,1,5,5,5,1,1,5,1,5,1,
-1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,1,5,1,6,1,
-1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,1,5,1,6,1,
-1,5,1,5,1,5,5,5,1,5,5,5,1,5,5,5,5,1,6,1,
-1,5,1,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,
-1,5,1,5,1,5,5,5,5,5,6,6,6,6,5,5,5,5,5,1,
-1,5,1,5,1,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,5,1,5,1,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,5,1,5,1,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,5,1,5,1,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+1,1,1,1,1,
+1,1,2,4,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,2,2,2,1,
+1,2,1,2,1,
+1,2,2,2,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,2,2,1,1,
+1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="Objects" width="20" height="15">
+ <objectgroup name="Objects" width="5" height="15">
   <object name="Player" type="PlayerStartingPosition" x="16" y="208" width="16" height="16">
    <properties>
     <property name="number" value="0"/>
+   </properties>
+  </object>
+  <object type="Mob" x="48" y="112" width="16" height="16">
+   <properties>
+    <property name="speed" value="240"/>
    </properties>
   </object>
  </objectgroup>

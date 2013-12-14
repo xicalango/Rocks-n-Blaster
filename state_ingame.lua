@@ -45,6 +45,10 @@ function InGameState:_loadMap(map)
 
 			return Message:new(objectDef.x, objectDef.y, objectDef.properties.message)
 
+		elseif objectDef.type == "Mob" then
+
+			return Mob:new(objectDef.x + 8, objectDef.y + 8, objectDef.properties.dir, objectDef.properties.speed)
+
 		end
 	end
 

@@ -89,3 +89,7 @@ end
 function Player:onExplode()
 	gameManager:resetMap()
 end
+
+function Player:onMobCollide(mob)
+	gameManager:resetMap()
+end

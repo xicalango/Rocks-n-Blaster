@@ -43,13 +43,22 @@
     <property name="obstacle" value="1"/>
    </properties>
   </tile>
+  <tile id="5">
+   <properties>
+    <property name="blastTo" value="Wall"/>
+    <property name="blastable" value="1"/>
+    <property name="chainBlast" value="1"/>
+    <property name="name" value="BlastToWall"/>
+    <property name="obstacle" value="1"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Ground" width="13" height="8">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,2,2,2,2,2,2,2,2,2,2,4,1,
 1,2,1,1,1,1,1,5,1,1,1,1,1,
-1,2,1,1,1,1,1,5,1,1,1,1,1,
+1,2,1,1,1,1,1,6,1,1,1,1,1,
 1,2,2,2,2,2,2,2,2,2,2,2,1,
 1,1,1,1,1,1,1,1,1,1,1,2,1,
 1,2,2,2,2,2,2,2,2,2,2,2,1,
