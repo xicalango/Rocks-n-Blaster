@@ -1,0 +1,16 @@
+player.0.left=a
+player.0.right=d
+player.0.down=s
+player.0.up=w
+player.1.left=left
+player.1.right=right
+player.1.down=down
+player.1.up=up
+player.2.left=j
+player.2.right=l
+player.2.down=k
+player.2.up=i
+player.3.left=4
+player.3.right=6
+player.3.down=5
+player.3.up=8
