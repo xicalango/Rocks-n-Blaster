@@ -19,6 +19,8 @@ function Bomb:initialize(x, y, player)
 
 	self.explodeTime = 1.5
 
+
+
 end
 
 function Bomb:activate()
@@ -31,6 +33,8 @@ end
 
 function Bomb:explode()
 	if self.remove then return end
+
+	explosionSound:play()
 
 	gameManager:explode(self.x, self.y, 1)
 	self.remove = true

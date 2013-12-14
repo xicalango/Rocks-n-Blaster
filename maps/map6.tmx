@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="5" height="15" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="gravity" value="10"/>
+ </properties>
+ <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16">
+  <image source="../assets/tiles.png" width="32" height="48"/>
+  <tile id="0">
+   <properties>
+    <property name="blastable" value="0"/>
+    <property name="name" value="Wall"/>
+    <property name="obstacle" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blastable" value="0"/>
+    <property name="name" value="Floor"/>
+    <property name="obstacle" value="0"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blastTo" value="Floor"/>
+    <property name="blastable" value="1"/>
+    <property name="name" value="BlastableWall"/>
+    <property name="obstacle" value="1"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="name" value="Door"/>
+    <property name="obstacle" value="0"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blastTo" value="Floor"/>
+    <property name="blastable" value="1"/>
+    <property name="chainBlast" value="1"/>
+    <property name="name" value="ChainBlastableWall"/>
+    <property name="obstacle" value="1"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blastTo" value="Wall"/>
+    <property name="blastable" value="1"/>
+    <property name="chainBlast" value="1"/>
+    <property name="name" value="BlastToWall"/>
+    <property name="obstacle" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Ground" width="5" height="15">
+  <data encoding="csv">
+1,1,1,1,1,
+1,1,2,4,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,2,2,2,1,
+1,2,1,2,1,
+1,2,2,2,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,1,2,1,1,
+1,2,2,1,1,
+1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup name="Objects" width="5" height="15">
+  <object name="Player" type="PlayerStartingPosition" x="16" y="208" width="16" height="16">
+   <properties>
+    <property name="number" value="0"/>
+   </properties>
+  </object>
+  <object type="Mob" x="48" y="112" width="16" height="16">
+   <properties>
+    <property name="speed" value="240"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

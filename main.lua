@@ -4,6 +4,8 @@ class = require("libs/middleclass")
 utils = require("libs/utils")
 jupiter = require("libs/jupiter")
 
+require("libs/slam")
+
 require("libs/gamestate")
 require("libs/graphics")
 
@@ -33,6 +35,10 @@ function love.load()
 
 	mainFont = love.graphics.newFont("assets/Munro.ttf", 10)
 	love.graphics.setFont(mainFont)
+
+
+	nextLevelSound = love.audio.newSource("assets/complete.wav", 'static')
+	explosionSound = love.audio.newSource("assets/explode.wav", 'static')
 end
 
 

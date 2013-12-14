@@ -19,6 +19,7 @@ function Player:initialize(x, y, number)
 	self.speedY = 15*16
 
 	self.hasBomb = true
+
 end
 
 
@@ -81,6 +82,7 @@ function Player:update(dt)
 	Entity.update(self,dt)
 
 	if gameManager:isEntityOnExit(self) then
+		nextLevelSound:play()
 		gameManager:nextMap()
 	end
 
