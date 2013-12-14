@@ -1,0 +1,6 @@
+[submodule "AdvTiledLoader"]
+	path = AdvTiledLoader
+	url = git@github.com:Kadoba/Advanced-Tiled-Loader.git
+[submodule "middleclass"]
+	path = middleclass
+	url = git@github.com:kikito/middleclass.git
