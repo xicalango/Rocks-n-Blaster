@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="8" height="15" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="13" height="8" tilewidth="16" tileheight="16">
  <properties>
   <property name="gravity" value="10"/>
   <property name="nextMap" value="map4.tmx"/>
@@ -53,65 +53,28 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Ground" width="8" height="15">
+ <layer name="Ground" width="13" height="8">
   <data encoding="csv">
-1,1,1,1,1,1,1,1,
-1,2,2,2,2,2,4,1,
-1,2,1,1,1,1,2,1,
-1,2,1,5,6,1,2,1,
-1,2,1,6,5,1,2,1,
-1,2,1,5,6,1,2,1,
-1,2,1,6,5,1,2,1,
-1,2,1,5,6,1,2,1,
-1,2,1,6,5,1,2,1,
-1,2,1,5,6,1,2,1,
-1,2,1,6,5,1,2,1,
-1,2,1,5,6,1,2,1,
-1,2,1,1,1,1,2,1,
-1,2,2,2,2,2,3,1,
-1,1,1,1,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,2,2,2,2,2,2,2,2,2,2,4,1,
+1,2,1,1,1,1,1,5,1,1,1,1,1,
+1,2,1,1,1,1,1,6,1,1,1,1,1,
+1,2,2,2,2,2,2,2,2,2,2,2,1,
+1,1,1,1,1,1,1,1,1,1,1,2,1,
+1,2,2,2,2,2,2,2,2,2,2,2,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="Objects" width="8" height="15">
-  <object name="Player" type="PlayerStartingPosition" x="16" y="208" width="16" height="16">
+ <objectgroup name="Objects" width="13" height="8">
+  <object name="Player" type="PlayerStartingPosition" x="16" y="96" width="16" height="16">
    <properties>
     <property name="number" value="0"/>
    </properties>
   </object>
-  <object type="Rock" x="96" y="16" width="16" height="16">
+  <object name="R" type="Rock" x="96" y="64" width="16" height="16">
    <ellipse/>
   </object>
-  <object type="Rock" x="96" y="32" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="48" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="64" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="80" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="96" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="112" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="128" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="144" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="160" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="176" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="192" width="16" height="16">
+  <object name="R" type="Rock" x="80" y="16" width="16" height="16">
    <ellipse/>
   </object>
  </objectgroup>

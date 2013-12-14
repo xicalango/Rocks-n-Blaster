@@ -79,7 +79,7 @@
   </object>
   <object type="Mob" x="48" y="112" width="16" height="16">
    <properties>
-    <property name="speed" value="240"/>
+    <property name="speed" value="180"/>
    </properties>
   </object>
  </objectgroup>
