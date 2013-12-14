@@ -14,18 +14,20 @@ function Bomb:initialize(x, y, player)
 	self.hitbox.right = 7
 
 	self.byPlayer = player
+
+	self.obstacle = false
 end
 
 function Bomb:activate()
 
-	self:timer("explode", function(b)
+	self:timer("explode", 2, function(b)
 			b:explode()
 		end)
 
 end
 
 function Bomb:explode()
-	gameManager:explode(self.x, self.y, 2)
+	gameManager:explode(self.x, self.y, 1)
 	self.remove = true
 end
 

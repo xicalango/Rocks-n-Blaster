@@ -37,6 +37,9 @@ function Player:keypressed( key )
 		return true
 	end
 
+	if key == keyconfig.player[self.number].bomb then
+		gameManager:placeBomb(self.x ,self.y)
+	end
 
 	return false
 end

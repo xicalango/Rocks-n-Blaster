@@ -7,6 +7,8 @@ InGameState = GameState:subclass("InGameState")
 
 function InGameState:initialize()
 	ATL.Loader.path = "maps/"
+
+	self.addEntities = {}
 end
 
 function InGameState:onActivation(map)
@@ -15,10 +17,14 @@ function InGameState:onActivation(map)
 
 end
 
+function InGameState:addEntity(e)
+	table.insert(self.addEntities, e)
+end
+
 function InGameState:_loadMap(map)
 	self.map = ATL.Loader.load(map)
 
-	gameManager = GameManager:new(self.map)
+	gameManager = GameManager:new(self.map, function(e) self:addEntity(e) end)
 
 	self.objectsLayer = self.map("Objects")
 
@@ -77,6 +83,12 @@ end
 
 function InGameState:update(dt)
 	self.map:callback("update", dt)
+
+	for _,e in ipairs(self.addEntities) do
+		table.insert(self.objectsLayer.objects, e)
+	end
+
+	self.addEntities = {}
 end
 
 function InGameState:keypressed(...)

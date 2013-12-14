@@ -105,7 +105,7 @@ function Entity:update(dt)
 			timer.t = timer.callback(self)
 		end
 
-		if timer.t < 0 then
+		if timer.t == nil or timer.t < 0 then
 			self.timers[k] = nil
 		end
 	end
@@ -143,8 +143,6 @@ function Entity:update(dt)
 
 
 	end
-
-
 
 
 end
