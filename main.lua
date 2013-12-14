@@ -31,7 +31,7 @@ function love.load()
 	gameStateManager = GameStateManager:new()
 	gameStateManager:registerState(InGameState)
 	gameStateManager:registerState(MapChangeState)
-	gameStateManager:changeState(MapChangeState, "map8.tmx")
+	gameStateManager:changeState(MapChangeState, "tutorial1.tmx")
 
 	mainFont = love.graphics.newFont("assets/Munro.ttf", 10)
 	love.graphics.setFont(mainFont)
