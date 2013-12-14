@@ -18,6 +18,7 @@ require("message")
 require("mob")
 
 require("state_ingame")
+require("state_mapchange")
 
 function love.load()
 
@@ -27,9 +28,10 @@ function love.load()
 
 	gameStateManager = GameStateManager:new()
 	gameStateManager:registerState(InGameState)
-	gameStateManager:changeState(InGameState, "map5.tmx")
+	gameStateManager:registerState(MapChangeState)
+	gameStateManager:changeState(MapChangeState, "tutorial1.tmx")
 
-	mainFont = love.graphics.newFont("assets/Munro.ttf")
+	mainFont = love.graphics.newFont("assets/Munro.ttf", 10)
 	love.graphics.setFont(mainFont)
 end
 

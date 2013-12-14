@@ -17,11 +17,13 @@ function Bomb:initialize(x, y, player)
 
 	self.obstacle = false
 
+	self.explodeTime = 1.5
+
 end
 
 function Bomb:activate()
 
-	self:timer("explode", 2, function(b)
+	self:timer("explode", self.explodeTime, function(b)
 			b:explode()
 		end)
 
@@ -29,7 +31,7 @@ end
 
 function Bomb:explode()
 	if self.remove then return end
-	
+
 	gameManager:explode(self.x, self.y, 1)
 	self.remove = true
 end
@@ -38,4 +40,18 @@ end
 function Bomb:onExplode()
 	self.remove = true
 	self:explode()
+end
+
+function Bomb:draw()
+
+	local color = 255
+
+	if self.timers["explode"].t then
+		color = ( ( self.timers["explode"].t / self.explodeTime ) * 255 )
+	end
+
+
+	utils.withColor({color,color,color,255}, function() 
+			Entity.draw(self)
+		end)
 end

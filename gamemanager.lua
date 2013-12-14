@@ -3,13 +3,12 @@
 GameManager = class("GameManager")
 
 
-function GameManager:initialize(map, state)
-	self.map = map
+function GameManager:initialize(state)
 	self.state = state
 
 	self.tiles = {}
 
-	for id, tile in pairs(self.map.tiles) do
+	for id, tile in pairs(self.state.map.tiles) do
 		if tile.properties.name then
 			self.tiles[tile.properties.name] = tile
 		end
@@ -27,7 +26,7 @@ function GameManager:isObstacleForEntity(entity)
 		return true, nil
 	end
 
-	for k, e2 in pairs(self.map("Objects").objects) do
+	for k, e2 in pairs(self.state.map("Objects").objects) do
 
 		if not entity.remove and entity ~= e2 and e2.obstacle then
 
@@ -47,7 +46,7 @@ function GameManager:getObjectsOnMap(mapX, mapY)
 
 	local result = {}
 
-	for k, e in pairs(self.map("Objects").objects) do
+	for k, e in pairs(self.state.map("Objects").objects) do
 
 		local emx, emy = self:toMapXY(e.x, e.y)
 
@@ -62,29 +61,29 @@ function GameManager:getObjectsOnMap(mapX, mapY)
 end
 
 function GameManager:isOutOfMap(mapX, mapY)
-	return mapX < 0 or mapY < 0 or mapX >= self.map.width or mapY >= self.map.height
+	return mapX < 0 or mapY < 0 or mapX >= self.state.map.width or mapY >= self.state.map.height
 end
 
 function GameManager:isObstacle(mapX, mapY)
 	if self:isOutOfMap(mapX, mapY) then return true end
-	return self.map("Ground")(mapX,mapY).properties.obstacle == 1 
+	return self.state.map("Ground")(mapX,mapY).properties.obstacle == 1 
 end
 
 function GameManager:isBlastable(mapX, mapY)
 	if self:isOutOfMap(mapX, mapY) then return true end
-	return self.map("Ground")(mapX,mapY).properties.blastable == 1 
+	return self.state.map("Ground")(mapX,mapY).properties.blastable == 1 
 end
 
 
 function GameManager:toMapXY(x, y)
-	return math.floor(x / self.map.tileWidth) , math.floor(y / self.map.tileHeight)
+	return math.floor(x / self.state.map.tileWidth) , math.floor(y / self.state.map.tileHeight)
 end
 
 function GameManager:toEntityXY(mapX, mapY, ox, oy)
 	ox = ox or 0
 	oy = oy or ox
 
-	return (mapX * self.map.tileWidth) + ox, (mapY * self.map.tileHeight) + oy
+	return (mapX * self.state.map.tileWidth) + ox, (mapY * self.state.map.tileHeight) + oy
 end
 
 function GameManager:isObstacleInDir(entity, dx, dy)
@@ -109,7 +108,7 @@ function GameManager:isObstacleInDir(entity, dx, dy)
 end
 
 function GameManager:getGravity()
-	return self.map.properties.gravity
+	return self.state.map.properties.gravity
 end
 
 function GameManager:blastTile(mapX, mapY)
@@ -117,13 +116,13 @@ function GameManager:blastTile(mapX, mapY)
 	oldX = oldX or mapX
 	oldY = oldY or mapY
 
-	local tile = self.map("Ground")(mapX,mapY)
+	local tile = self.state.map("Ground")(mapX,mapY)
 
 	if tile.properties.blastable == nil or tile.properties.blastable == 0 then
 		return
 	end
 
-	self.map("Ground"):set(mapX, mapY, self.tiles[tile.properties.blastTo])
+	self.state.map("Ground"):set(mapX, mapY, self.tiles[tile.properties.blastTo])
 
 	if tile.properties.chainBlast == 1 then
 		self:blastTile(mapX - 1, mapY, mapX, mapY)
@@ -133,7 +132,7 @@ function GameManager:blastTile(mapX, mapY)
 	end
 
 	self.state:addEntity( Explosion:new(self:toEntityXY(mapX, mapY, 8, 8)) )
-	self.map:forceRedraw()
+	self.state.map:forceRedraw()
 
 
 end
@@ -201,23 +200,23 @@ function GameManager:isEntityOnExit(entity)
 
 	local mX, mY = self:toMapXY(entity.x, entity.y)
 
-	return self.map("Ground")(mX,mY).properties.name == "Door"
+	return self.state.map("Ground")(mX,mY).properties.name == "Door"
 
 end
 
 function GameManager:nextMap()
 
-	local nextMap = self.map.properties.nextMap
+	local nextMap = self.state.map.properties.nextMap
 
 	if nextMap == nil or #nextMap == 0 then
 		love.event.push('quit')
 	else
-		gameStateManager:changeState(InGameState, nextMap)
+		gameStateManager:changeState(MapChangeState, nextMap, self.state.map)
 	end
 
 
 end
 
 function GameManager:resetMap()
-	self.state:resetMap()
+	gameStateManager:changeState(MapChangeState, self.state.mapFile, self.state.map)
 end
