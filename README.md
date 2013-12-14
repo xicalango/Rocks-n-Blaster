@@ -16,4 +16,4 @@ This project uses:
  * jupiter (https://github.com/Lafolie/Jupiter)
  * slam (https://github.com/vrld/slam)
  * munro font (http://tenbytwenty.com/?xxxx_posts=munro)
-
+ * sounds from sfxr (http://www.drpetter.se/project_sfxr.html)
