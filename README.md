@@ -14,5 +14,6 @@ This project uses:
  * middleclass (https://github.com/kikito/middleclass)
  * Advanced Tiled Loader (https://github.com/Kadoba/Advanced-Tiled-Loader)
  * jupiter (https://github.com/Lafolie/Jupiter)
+ * slam (https://github.com/vrld/slam)
  * munro font (http://tenbytwenty.com/?xxxx_posts=munro)
 
