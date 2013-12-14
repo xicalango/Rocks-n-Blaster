@@ -69,9 +69,28 @@ function GameManager:isObstacle(mapX, mapY)
 	return self.state.map("Ground")(mapX,mapY).properties.obstacle == 1 
 end
 
-function GameManager:isBlastable(mapX, mapY)
-	if self:isOutOfMap(mapX, mapY) then return true end
-	return self.state.map("Ground")(mapX,mapY).properties.blastable == 1 
+function GameManager:isBlastable(mapX, mapY, fromX, fromY)
+	if self:isOutOfMap(mapX, mapY) then return false end
+
+	local tile = self.state.map("Ground")(mapX,mapY)
+
+	if tile.properties.blastable ~= 1 then
+		return false
+	end
+
+	if tile.properties.blastFromDir ~= nil then
+
+		if tile.properties.blastFromDir == "up" and fromY < mapY then return true end
+		if tile.properties.blastFromDir == "down" and fromY > mapY then return true end
+		if tile.properties.blastFromDir == "left" and fromX < mapX then return true end
+		if tile.properties.blastFromDir == "right" and fromX > mapX then return true end
+
+		return false
+
+	else
+		return true
+	end
+
 end
 
 
@@ -125,10 +144,10 @@ function GameManager:blastTile(mapX, mapY)
 	self.state.map("Ground"):set(mapX, mapY, self.tiles[tile.properties.blastTo])
 
 	if tile.properties.chainBlast == 1 then
-		self:blastTile(mapX - 1, mapY, mapX, mapY)
-		self:blastTile(mapX + 1, mapY, mapX, mapY)
-		self:blastTile(mapX, mapY + 1, mapX, mapY)
-		self:blastTile(mapX, mapY - 1, mapX, mapY)
+		if self:isBlastable(mapX - 1, mapY, mapX, mapY) then self:blastTile(mapX - 1, mapY) end
+		if self:isBlastable(mapX + 1, mapY, mapX, mapY) then self:blastTile(mapX + 1, mapY) end
+		if self:isBlastable(mapX, mapY + 1, mapX, mapY) then self:blastTile(mapX, mapY + 1) end
+		if self:isBlastable(mapX, mapY - 1, mapX, mapY) then self:blastTile(mapX, mapY - 1) end
 	end
 
 	self.state:addEntity( Explosion:new(self:toEntityXY(mapX, mapY, 8, 8)) )
@@ -145,19 +164,19 @@ function GameManager:explode(x, y, size)
 
 	for i = 1, size do
 
-		if self:isBlastable( mX + i, mY) or not self:isObstacle( mX + i, mY ) then
+		if self:isBlastable( mX + i, mY, mX, mY) or not self:isObstacle( mX + i, mY ) then
 			table.insert(positions, {mX + i , mY})
 		end
 
-		if self:isBlastable( mX - i, mY) or not self:isObstacle( mX - i, mY ) then
+		if self:isBlastable( mX - i, mY, mX, mY) or not self:isObstacle( mX - i, mY ) then
 			table.insert(positions, {mX - i, mY})
 		end
 
-		if self:isBlastable( mX, mY + i) or not self:isObstacle( mX , mY + i) then
+		if self:isBlastable( mX, mY + i, mX, mY) or not self:isObstacle( mX , mY + i) then
 			table.insert(positions, {mX  , mY + i})
 		end
 
-		if self:isBlastable( mX, mY - i) or not self:isObstacle( mX, mY - i) then
+		if self:isBlastable( mX, mY - i, mX, mY) or not self:isObstacle( mX, mY - i) then
 			table.insert(positions, {mX, mY - i})
 		end
 

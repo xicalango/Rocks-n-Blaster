@@ -2,9 +2,10 @@
 <map version="1.0" orientation="orthogonal" width="5" height="15" tilewidth="16" tileheight="16">
  <properties>
   <property name="gravity" value="10"/>
+  <property name="nextMap" value="map7.tmx"/>
  </properties>
  <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16">
-  <image source="../assets/tiles.png" width="32" height="48"/>
+  <image source="../assets/tiles.png" width="32" height="80"/>
   <tile id="0">
    <properties>
     <property name="blastable" value="0"/>

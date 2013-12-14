@@ -146,11 +146,11 @@ function Entity:update(dt)
 		if not gameManager:isObstacleInDir(self, 0, 1) then
 			self.vy = self.vy + gameManager:getGravity()
 
-			if self.dX == 0 and not gameManager:isObstacleInDir(self, 1, 1) and not gameManager:isObstacleInDir(self, 1, 0) then
-				self.dX = 16
-			elseif self.dX == 0 and not gameManager:isObstacleInDir(self, -1, 1) and not gameManager:isObstacleInDir(self, -1, 0) then
-				self.dX = -16
-			end
+			-- if self.dX == 0 and not gameManager:isObstacleInDir(self, 1, 1) and not gameManager:isObstacleInDir(self, 1, 0) then
+			-- 	self.dX = 16
+			-- elseif self.dX == 0 and not gameManager:isObstacleInDir(self, -1, 1) and not gameManager:isObstacleInDir(self, -1, 0) then
+			-- 	self.dX = -16
+			-- end
 		end
 
 		--print(self.vy, self.vx)
