@@ -72,7 +72,7 @@ function Player:keyreleased( key )
 end
 
 function Player:onCollide(e)
-	if e ~= nil and e.pushable then
+	if e ~= nil and e.pushable and self.vy == 0 then
 		e.dX = self.vx * 16
 	end
 end
