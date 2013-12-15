@@ -15,7 +15,7 @@ function Entity:initialize( x, y)
 	self.vy = 0
 
 	self.speedX = 16
-	self.speedY = 1
+	self.speedY = 160
 
 	self.graphics = nil
 
@@ -144,7 +144,7 @@ function Entity:update(dt)
 		--print(self.vy, self.vx)
 
 		if not gameManager:isObstacleInDir(self, 0, 1) then
-			self.vy = self.vy + gameManager:getGravity()
+			self.vy = 1 --self.vy + gameManager:getGravity()
 
 			-- if self.dX == 0 and not gameManager:isObstacleInDir(self, 1, 1) and not gameManager:isObstacleInDir(self, 1, 0) then
 			-- 	self.dX = 16
