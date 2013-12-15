@@ -5,7 +5,7 @@
   <property name="nextMap" value="map2.tmx"/>
  </properties>
  <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16">
-  <image source="../assets/tiles.png" width="32" height="48"/>
+  <image source="../assets/tiles.png" width="32" height="80"/>
   <tile id="0">
    <properties>
     <property name="blastable" value="0"/>
@@ -56,19 +56,19 @@
  <layer name="Ground" width="8" height="15">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,
-1,2,2,2,2,2,4,1,
+1,2,2,2,2,2,2,1,
 1,2,1,1,1,1,2,1,
 1,2,1,5,6,1,2,1,
 1,2,1,6,5,1,2,1,
-1,2,1,5,6,1,2,1,
+1,2,1,5,6,1,4,1,
 1,2,1,6,5,1,2,1,
 1,2,1,5,6,1,2,1,
 1,2,1,6,5,1,2,1,
-1,2,1,5,6,1,2,1,
+1,2,1,5,6,1,3,1,
 1,2,1,6,5,1,2,1,
 1,2,1,5,6,1,2,1,
 1,2,1,1,1,1,2,1,
-1,2,2,2,2,2,3,1,
+1,2,2,2,2,2,2,1,
 1,1,1,1,1,1,1,1
 </data>
  </layer>
@@ -100,18 +100,6 @@
    <ellipse/>
   </object>
   <object type="Rock" x="96" y="128" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="144" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="160" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="176" width="16" height="16">
-   <ellipse/>
-  </object>
-  <object type="Rock" x="96" y="192" width="16" height="16">
    <ellipse/>
   </object>
  </objectgroup>
