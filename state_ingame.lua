@@ -49,10 +49,10 @@ function InGameState:keypressed(key)
 
 	if key == keyconfig.reset then
 		gameManager:resetMap()
-	end
-
-	if key == "f11" then
+	elseif key == "f11" then
 		gameManager:nextMap()
+	elseif key == "escape" then
+		gameStateManager:changeState(MainMenuState, self.mapFile)
 	end
 
 	self.map:callback("keypressed", key)

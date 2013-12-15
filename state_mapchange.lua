@@ -6,6 +6,10 @@ MapChangeState = GameState:subclass("MapChangeState")
 
 function MapChangeState:initialize()
 	ATL.Loader.path = "maps/"
+
+	self.font = love.graphics.newFont("assets/Munro.ttf", 20)
+
+	self.speed = 100
 end
 
 function MapChangeState:onActivation(nextMapFile, oldMap)
@@ -24,6 +28,8 @@ function MapChangeState:onActivation(nextMapFile, oldMap)
 		self.drawMap = self.nextMap
 	end
 
+	love.filesystem.write("resumeMap.txt", nextMapFile)
+
 end
 
 function MapChangeState:draw()
@@ -40,18 +46,41 @@ function MapChangeState:draw()
 
 	utils.withColor({0,0,0,255}, function()
 
+
 		if self.state == 0 then
 			love.graphics.rectangle("fill", 0, 0, self.completion  * (320/100), 240)
 		elseif self.state == 1 then
 			love.graphics.rectangle("fill", self.completion  * (320/100), 0, 320, 240)
 		end
 
+
 	end)
+
+	if self.state == 1 then
+
+
+	utils.withColor({255,255,255,255}, function()
+
+		local font = love.graphics.getFont()
+
+		love.graphics.setFont(self.font)
+
+		love.graphics.print( string.sub(self.nextMapFile, 1, -4), self.completion  * (320/100) + 5, 120 )
+
+		love.graphics.setFont(font)
+
+		love.graphics.setScissor()
+
+		end)
+
+	end
+
+
 end
 
 function MapChangeState:update(dt)
 
-	self.completion = self.completion + (200 * dt)
+	self.completion = self.completion + (self.speed * dt)
 
 	if self.completion >= 100 then
 		if self.state == 0 then 
