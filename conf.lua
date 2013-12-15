@@ -13,5 +13,5 @@ function love.conf(t)
   t.screen.height     = 240
 
 
-  t.console = true
+  t.console = false
 end

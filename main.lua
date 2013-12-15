@@ -21,6 +21,7 @@ require("mob")
 require("state_ingame")
 require("state_mapchange")
 require("state_mainmenu")
+require("state_gameover")
 
 keyconfig = require("keyconfig")
 
@@ -32,8 +33,10 @@ function love.load()
 	gameStateManager:registerState(InGameState)
 	gameStateManager:registerState(MapChangeState)
 	gameStateManager:registerState(MainMenuState)
+	gameStateManager:registerState(GameOverState)
 
 	mainFont = love.graphics.newFont("assets/Munro.ttf", 10)
+	headlineFont = love.graphics.newFont("assets/Munro.ttf", 20)
 	love.graphics.setFont(mainFont)
 
 

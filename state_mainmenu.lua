@@ -9,8 +9,6 @@ function MainMenuState:initialize()
 
 	ATL.Loader.path = "maps/"
 
-	self.headlineFont = love.graphics.newFont("assets/Munro.ttf", 20)
-
 end
 
 function MainMenuState:onActivation(resumeMap)
@@ -59,7 +57,7 @@ function MainMenuState:draw()
 	self.map:draw()
 
 	local font = love.graphics.getFont()
-	love.graphics.setFont(self.headlineFont)
+	love.graphics.setFont(headlineFont)
 
 	love.graphics.print("Rocks-n-Blaster", 48, 100)
 

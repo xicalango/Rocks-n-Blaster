@@ -228,7 +228,7 @@ function GameManager:nextMap()
 	local nextMap = self.state.map.properties.nextMap
 
 	if nextMap == nil or #nextMap == 0 then
-		love.event.push('quit')
+		gameStateManager:changeState(GameOverState)
 	else
 		gameStateManager:changeState(MapChangeState, nextMap, self.state.map)
 	end

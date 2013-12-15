@@ -7,8 +7,6 @@ MapChangeState = GameState:subclass("MapChangeState")
 function MapChangeState:initialize()
 	ATL.Loader.path = "maps/"
 
-	self.font = love.graphics.newFont("assets/Munro.ttf", 20)
-
 	self.speed = 100
 end
 
@@ -63,7 +61,7 @@ function MapChangeState:draw()
 
 		local font = love.graphics.getFont()
 
-		love.graphics.setFont(self.font)
+		love.graphics.setFont(headlineFont)
 
 		love.graphics.print( string.sub(self.nextMapFile, 1, -4), self.completion  * (320/100) + 5, 120 )
 
