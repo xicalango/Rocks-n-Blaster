@@ -50,12 +50,12 @@
   </object>
   <object name="Message1" type="Message" x="16" y="0" width="16" height="16">
    <properties>
-    <property name="message" value="Those walls can be blasted (press TAB)"/>
+    <property name="message" value="Those walls can be blasted (press right Control)"/>
    </properties>
   </object>
   <object name="Message2" type="Message" x="16" y="32" width="16" height="16">
    <properties>
-    <property name="message" value="You Only Get One bomb per level!"/>
+    <property name="message" value="You Only Get One bomb per level! (Press r to reset)"/>
    </properties>
   </object>
  </objectgroup>

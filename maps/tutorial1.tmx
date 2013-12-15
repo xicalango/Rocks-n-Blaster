@@ -50,7 +50,7 @@
   </object>
   <object name="M" type="Message" x="16" y="32" width="16" height="16">
    <properties>
-    <property name="message" value="Move with w,a,s,d."/>
+    <property name="message" value="Move with arrow-keys."/>
    </properties>
   </object>
   <object name="M" type="Message" x="16" y="0" width="16" height="16">
