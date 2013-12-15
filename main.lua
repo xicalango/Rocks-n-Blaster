@@ -2,7 +2,6 @@
 
 class = require("libs/middleclass")
 utils = require("libs/utils")
-jupiter = require("libs/jupiter")
 
 require("libs/slam")
 
@@ -22,11 +21,11 @@ require("mob")
 require("state_ingame")
 require("state_mapchange")
 
+keyconfig = require("keyconfig")
+
 function love.load()
 
 	takeScreenshot = false
-
-	keyconfig = jupiter.load("keyconfig.txt")
 
 	gameStateManager = GameStateManager:new()
 	gameStateManager:registerState(InGameState)

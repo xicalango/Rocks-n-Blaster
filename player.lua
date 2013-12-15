@@ -8,7 +8,7 @@ function Player:initialize(x, y, number)
 	self.graphics = Graphics:new("assets/player.png")
 	self.graphics.offset = {8, 8}
 
-	self.number = number
+	self.number = number or 0
 
 	self.hitbox.left = 4
 	self.hitbox.top = 4
