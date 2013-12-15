@@ -42,6 +42,7 @@ function love.load()
 
 	nextLevelSound = love.audio.newSource("assets/complete.wav", 'static')
 	explosionSound = love.audio.newSource("assets/explode.wav", 'static')
+	hurtSound = love.audio.newSource("assets/hurt.wav", 'static')
 
 
 	local resumeMap = nil

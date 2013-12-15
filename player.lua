@@ -89,9 +89,11 @@ function Player:update(dt)
 end
 
 function Player:onExplode()
+	hurtSound:play()
 	gameManager:resetMap()
 end
 
 function Player:onMobCollide(mob)
+	hurtSound:play()
 	gameManager:resetMap()
 end

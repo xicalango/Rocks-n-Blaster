@@ -57,5 +57,6 @@ function Mob:onCollide(e)
 end
 
 function Mob:onExplode()
+	hurtSound:play()
 	self.remove = true
 end
