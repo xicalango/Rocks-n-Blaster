@@ -5,7 +5,7 @@ return {
 			right = "right",
 			up = "up",
 			down = "down",
-			bomb = "rctrl"
+			bomb = " "
 		},
 		[1] = {
 			left = "a",
@@ -26,7 +26,7 @@ return {
 			right = "l",
 			up = "i",
 			down = "k",
-			bomb = " "
+			bomb = "u"
 		}
 	},
 	reset = "r"
