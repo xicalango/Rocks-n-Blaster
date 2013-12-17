@@ -50,7 +50,7 @@
   </object>
   <object name="Message1" type="Message" x="16" y="0" width="16" height="16">
    <properties>
-    <property name="message" value="Those walls can be blasted (press right Control)"/>
+    <property name="message" value="Those walls can be blasted (press space key)"/>
    </properties>
   </object>
   <object name="Message2" type="Message" x="16" y="32" width="16" height="16">
